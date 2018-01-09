@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>WebApp jopma - Request</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="css/app.css" rel="stylesheet" />
+</head>
+<body>
+<div id="app">
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">
+                    WebApp jopma
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Result</div>
+                    <div class="panel-body">
+                        <pre id="response" th:text="${response}" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="js/vkbeautify.js"></script>
+<script type="application/javascript">
+    var res = document.getElementById("response").innerText;
+    document.getElementById("response").innerText = vkbeautify.json(res, 4 );
+</script>
+
+</body>
+</html>

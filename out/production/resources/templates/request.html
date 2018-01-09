@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>WebApp jopma - Request</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="css/app.css" rel="stylesheet" />
+</head>
+<body>
+<div id="app">
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">
+                    WebApp jopma
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Request</div>
+
+                    <div class="panel-body">
+                        <form class="form-horizontal" method="POST" action="#" th:action="@{/request}" th:object="${request}">
+
+                            <div class="form-group">
+                                <label for="grantType" class="col-md-4 control-label">Grant Type</label>
+                                <div class="col-md-6">
+                                    <select id="grantType" th:field="*{grantType}" class="form-control">
+                                        <option value="clientcredentialsgrant" selected="">Client Credentials Grant</option>
+                                        <option value="resourceownergrant">Resource Owner Grant</option>
+                                        <option value="authorizationcodegrant" disabled="">Authorization Code Grant</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="url" class="col-md-4 control-label">URL</label>
+                                <div class="col-md-6">
+                                    <input id="url" type="text" th:field="*{url}" class="form-control" value="" required="" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="parameters" class="col-md-4 control-label">Parameters</label>
+                                <div class="col-md-6">
+                                    <input id="parameters" type="text" th:field="*{parameters}" class="form-control" value="" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="type" class="col-md-4 control-label">Method Type</label>
+                                <div class="col-md-6">
+                                    <select id="type" th:field="*{type}" class="form-control">
+                                        <option value="GET" selected="">GET</option>
+                                        <option value="POST">POST</option>
+                                        <option value="PUT">PUT</option>
+                                        <option value="DELETE">DELETE</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="headers" class="col-md-4 control-label">Headers</label>
+                                <div class="col-md-6">
+                                    <input id="headers" type="text" th:field="*{headers}" class="form-control" value="" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="body" class="col-md-4 control-label">Body</label>
+                                <div class="col-md-6">
+                                    <input id="body" type="text" th:field="*{body}" class="form-control" value="" />
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <div class="col-md-8 col-md-offset-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        Send
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

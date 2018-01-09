@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>WebApp jopma - Request</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="css/app.css" rel="stylesheet" />
+</head>
+<body>
+<div id="app">
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">
+                    WebApp jopma
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Authentication</div>
+
+                    <div class="panel-body">
+                        <form class="form-horizontal" method="POST" action="#" th:action="@{/authentication}" th:object="${requestAuth}">
+
+                            <input type="hidden" th:field="*{grantType}" />
+                            <input type="hidden" th:field="*{url}" />
+                            <input type="hidden" th:field="*{parameters}" />
+                            <input type="hidden" th:field="*{type}" />
+                            <input type="hidden" th:field="*{headers}" />
+                            <input type="hidden" th:field="*{body}" />
+
+                            <div class="form-group">
+                                <label for="username" class="col-md-4 control-label">Username</label>
+                                <div class="col-md-6">
+                                    <input id="username" type="text" th:field="*{username}" class="form-control" value="" required="" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password" class="col-md-4 control-label">Password</label>
+                                <div class="col-md-6">
+                                    <input id="password" type="password" th:field="*{password}" class="form-control" value="" required="" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-8 col-md-offset-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        Send
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

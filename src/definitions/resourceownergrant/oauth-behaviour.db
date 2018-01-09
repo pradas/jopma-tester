@@ -1,0 +1,25 @@
+% Start
+ins_Request(a,b,c,d,e) :- start(), arg0_start(a), arg1_start(b), arg2_start(c), arg3_start(d), arg4_start(e)
+
+% GetClientRequest
+result_getclientrequest(id, granttype, secret, accesstoken, scopelist) :- getclientrequest(), Client(id, granttype, secret, accesstoken, scopelist)
+
+% HasValidToken
+result_hasvalidtoken() :- hasvalidtoken(), arg0_hasvalidtoken(currenttime), Token(type,expiration,accesstoken), currenttime < expiration
+
+% GetToken
+result_getToken(type,expiration,accesstoken) :- gettoken(), Token(type,expiration,accesstoken)
+
+% SaveToken
+ins_Token(type,expiration,accesstoken) :- savetoken(), arg0_savetoken(type), arg1_savetoken(expiration), arg2_savetoken(accesstoken)
+del_Token(type,expiration,accesstoken) :- savetoken(), Token(type,expiration,accesstoken)
+
+
+% GetRequest
+result_getrequest(a,b,c,d,e) :- getrequest(), Request(a,b,c,d,e)
+
+% removeRequest
+del_Request(a,b,c,d,e) :- removerequest(), Request(a,b,c,d,e)
+
+% GetTokenAndRequest
+result_gettokenandrequest(type,expiration,accesstoken,a,b,c,d,e) :- gettokenandrequest(), Request(a,b,c,d,e), Token(type,expiration,accesstoken)

@@ -1,0 +1,1 @@
+INSERT INTO `client` VALUES ('2','password','meHv3ApE6Gbcow2TQjlijUHb23GKSWpHhL2fW9Bx','http://ec2-35-176-29-6.eu-west-2.compute.amazonaws.com/oauth/token','');
