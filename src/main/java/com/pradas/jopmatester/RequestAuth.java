@@ -1,13 +1,15 @@
 package com.pradas.jopmatester;
 
 public class RequestAuth {
-    private String grantType;
+    private String filePath;
     private String url;
     private String parameters;
     private String type;
     private String headers;
     private String body;
     private String username;
+    private String password;
+
 
     public String getUsername() {
         return username;
@@ -25,14 +27,12 @@ public class RequestAuth {
         this.password = password;
     }
 
-    private String password;
-
-    public String getGrantType() {
-        return grantType;
+    public String getFilePath() {
+        return filePath;
     }
 
-    public void setGrantType(String grantType) {
-        this.grantType = grantType;
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
     }
 
     public String getUrl() {

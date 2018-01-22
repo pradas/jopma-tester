@@ -26,7 +26,7 @@
                     <div class="panel-body">
                         <form class="form-horizontal" method="POST" action="#" th:action="@{/authentication}" th:object="${requestAuth}">
 
-                            <input type="hidden" th:field="*{grantType}" />
+                            <input type="hidden" th:field="*{filePath}" />
                             <input type="hidden" th:field="*{url}" />
                             <input type="hidden" th:field="*{parameters}" />
                             <input type="hidden" th:field="*{type}" />

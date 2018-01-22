@@ -24,16 +24,12 @@
                     <div class="panel-heading">Request</div>
 
                     <div class="panel-body">
-                        <form class="form-horizontal" method="POST" action="#" th:action="@{/request}" th:object="${request}">
+                        <form class="form-horizontal" method="POST" action="#" th:action="@{/request}" th:object="${request}" enctype="multipart/form-data">
 
                             <div class="form-group">
-                                <label for="grantType" class="col-md-4 control-label">Grant Type</label>
+                                <label for="file" class="col-md-4 control-label">Grant File</label>
                                 <div class="col-md-6">
-                                    <select id="grantType" th:field="*{grantType}" class="form-control">
-                                        <option value="clientcredentialsgrant" selected="">Client Credentials Grant</option>
-                                        <option value="resourceownergrant">Resource Owner Grant</option>
-                                        <option value="authorizationcodegrant" disabled="">Authorization Code Grant</option>
-                                    </select>
+                                    <input id="file" type="file" name="file" required="" />
                                 </div>
                             </div>
 
@@ -45,7 +41,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="parameters" class="col-md-4 control-label">Parameters</label>
+                                <label for="parameters" class="col-md-4 control-label">Parameters*</label>
                                 <div class="col-md-6">
                                     <input id="parameters" type="text" th:field="*{parameters}" class="form-control" value="" />
                                 </div>
@@ -64,14 +60,14 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="headers" class="col-md-4 control-label">Headers</label>
+                                <label for="headers" class="col-md-4 control-label">Headers*</label>
                                 <div class="col-md-6">
                                     <input id="headers" type="text" th:field="*{headers}" class="form-control" value="" />
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="body" class="col-md-4 control-label">Body</label>
+                                <label for="body" class="col-md-4 control-label">Body*</label>
                                 <div class="col-md-6">
                                     <input id="body" type="text" th:field="*{body}" class="form-control" value="" />
                                 </div>

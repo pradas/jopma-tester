@@ -1,14 +1,18 @@
 package com.pradas.jopmatester;
 
-import main.java.com.pradas.jopma.protocol.Grant;
-import main.java.com.pradas.jopma.protocol.GrantFactory;
-import main.java.com.pradas.jopma.protocol.ResourceOwnerGrant;
+import main.java.com.pradas.jopma.protocol.GrantParser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.multipart.MultipartFile;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 @Controller
 public class RequestController {
+
+    private final static String UPLOAD_FOLDER = "FILE_UPLOADS/";
 
     @GetMapping("/")
     public String requestForm(Model model) {
@@ -17,15 +21,22 @@ public class RequestController {
     }
 
     @PostMapping("/request")
-    public String requestSubmit(@ModelAttribute Request request, Model model) {
+    public String requestSubmit(@ModelAttribute Request request, @RequestParam("file") MultipartFile file, Model model) {
 
-        GrantFactory gf = new GrantFactory();
+        try {
+            // Get the file and save it somewhere
+            byte[] bytes = file.getBytes();
+            Path path = Paths.get(UPLOAD_FOLDER + file.getOriginalFilename());
+            Files.write(path, bytes);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        Grant g = gf.getGrant(request.getGrantType());
+        GrantParser gp = new GrantParser(UPLOAD_FOLDER + file.getOriginalFilename());
 
-        if (request.getGrantType().equals("resourceownergrant") && !((ResourceOwnerGrant) g).hasValidToken()) {
+        if (gp.needAuthentication()) {
             RequestAuth ra = new RequestAuth();
-            ra.setGrantType(request.getGrantType());
+            ra.setFilePath(UPLOAD_FOLDER + file.getOriginalFilename());
             ra.setUrl(request.getUrl());
             ra.setParameters(request.getParameters());
             ra.setType(request.getType());
@@ -35,7 +46,7 @@ public class RequestController {
             return "authentication";
         }
 
-        model.addAttribute("response", g.makeRequest(
+        model.addAttribute("response", gp.makeRequest(
                 request.getUrl(),
                 request.getParameters(),
                 request.getType(),
@@ -47,13 +58,11 @@ public class RequestController {
 
     @PostMapping("/authentication")
     public String authenticationSubmit(@ModelAttribute RequestAuth requestAuth, Model model) {
-        GrantFactory gf = new GrantFactory();
+        GrantParser gp = new GrantParser(requestAuth.getFilePath());
 
-        Grant g = gf.getGrant(requestAuth.getGrantType());
+        gp.addUserCredentials(requestAuth.getUsername(), requestAuth.getPassword());
 
-        ((ResourceOwnerGrant) g).addUserCredentials(requestAuth.getUsername(), requestAuth.getPassword());
-
-        model.addAttribute("response", g.makeRequest(
+        model.addAttribute("response", gp.makeRequest(
                 requestAuth.getUrl(),
                 requestAuth.getParameters(),
                 requestAuth.getType(),

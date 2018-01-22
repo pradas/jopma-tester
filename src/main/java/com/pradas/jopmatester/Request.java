@@ -1,20 +1,11 @@
 package com.pradas.jopmatester;
 
 public class Request {
-    private String grantType;
     private String url;
     private String parameters;
     private String type;
     private String headers;
     private String body;
-
-    public String getGrantType() {
-        return grantType;
-    }
-
-    public void setGrantType(String grantType) {
-        this.grantType = grantType;
-    }
 
     public String getUrl() {
         return url;
